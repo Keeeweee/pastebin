@@ -2,19 +2,10 @@ from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer, UserSerializer
 from django.contrib.auth.models import User
 from snippets.permissions import IsOwnerOrReadOnly
-from rest_framework import generics, permissions, viewsets
-from rest_framework.decorators import api_view, action
+from rest_framework import permissions, viewsets
+from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.reverse import reverse
 from rest_framework import renderers
-
-
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        'users': reverse('user-list', request=request, format=format),
-        'snippets': reverse('snippet-list', request=request, format=format)
-    })
 
 
 class SnippetViewSet(viewsets.ModelViewSet):
